@@ -1,19 +1,19 @@
 # base image
 FROM alpine:3.7
 
-# set consul version
-ENV CONSUL_VERSION 1.2.1
+# consul version
+ENV CONSUL_VERSION 1.5.0
 
-# create a new directory
+# create base dir
 RUN mkdir /consul
 
-# download dependencies
+# install deps
 RUN apk --no-cache add \
       bash \
       ca-certificates \
       wget
 
-# download and set up consul
+# download consul
 RUN wget --quiet --output-document=/tmp/consul.zip https://releases.hashicorp.com/consul/${CONSUL_VERSION}/consul_${CONSUL_VERSION}_linux_amd64.zip && \
     unzip /tmp/consul.zip -d /consul && \
     rm -f /tmp/consul.zip && \
@@ -22,11 +22,9 @@ RUN wget --quiet --output-document=/tmp/consul.zip https://releases.hashicorp.co
 # update PATH
 ENV PATH="PATH=$PATH:$PWD/consul"
 
-# add the config file
+# add consul config
 COPY ./config/consul-config.json /consul/config/config.json
 
-# expose ports
 EXPOSE 8300 8400 8500 8600
 
-# run consul
 ENTRYPOINT ["consul"]

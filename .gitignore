@@ -3,3 +3,4 @@
 
 consul/data
 vault/data
+vault/logs/audit.log
