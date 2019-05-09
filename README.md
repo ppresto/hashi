@@ -1,10 +1,13 @@
 # hashi
 
-# mkdir -p consul/data vault/data
+# PreReq
+```
+cd ./hashi
+mkdir -p consul/data vault/data
+```
 # Start Vault
 
 ```
-cd /Users/i838855/Projects/DevOps/hashi
 docker-compose down                          # Make sure containers are removed
 rm -rf vault/data/* consul/data/*            # Remove all data to start fresh
 docker-compose up -d --build
@@ -16,7 +19,6 @@ http://localhost:8500/ui
 http://localhost:8200/ui
 
 # Start Flask Notes App
-# Open Tab
 
 ```
 docker run -it -p3000:3000 --name=notes --rm --network=hashi_default -e VAULT_ADDR="http://vault:8200" ppresto/notes
@@ -24,7 +26,7 @@ docker run -it -p3000:3000 --name=notes --rm --network=hashi_default -e VAULT_AD
 # Login and look at default DB credentials being used
 * http://localhost:3000/credentials
 * Create “My DB Credentials” Note for Tracking
-*
+
 # Unseal Vault
 
 ```
@@ -41,7 +43,7 @@ vault audit list   # local ./vault/logs/audit.log maps to container at /vault/lo
 #  Setup Database Secrets Engine and Populate Secrets
 
 ```
-cd /Users/i838855/Projects/DevOps/hashi/vault
+cd ./hashi/vault
 ./setEnv_Postgres.sh <s.VAULT_TOKEN>
 ```
 
