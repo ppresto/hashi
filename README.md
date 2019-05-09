@@ -1,4 +1,4 @@
-# hashi
+# Run Hashicorp vault with consul to use dynamic secrets for postgresql 
 
 # PreReq
 ```
